@@ -249,7 +249,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	dat += "<a href='?_src_=prefs;preference=tab;tab=[APPEARANCE_TAB]' [current_tab == APPEARANCE_TAB ? "class='linkOn'" : ""]>Character Appearance</a>"
 	dat += "<a href='?_src_=prefs;preference=tab;tab=[LOADOUT_TAB]' [current_tab == LOADOUT_TAB ? "class='linkOn'" : ""]>Loadout</a>"
 	dat += "<a href='?_src_=prefs;preference=tab;tab=[GAME_PREFERENCES_TAB]' [current_tab == GAME_PREFERENCES_TAB ? "class='linkOn'" : ""]>Game Preferences</a>"
-	dat += "<a href='?_src_=prefs;preference=tab;tab=[CONTENT_PREFERENCES_TAB]' [current_tab == CONTENT_PREFERENCES_TAB ? "class='linkOn'" : ""]>Content Preferences</a>"
 	dat += "<a href='?_src_=prefs;preference=tab;tab=[KEYBINDINGS_TAB]' [current_tab == KEYBINDINGS_TAB ? "class='linkOn'" : ""]>Keybindings</a>"
 
 	if(!path)
@@ -771,9 +770,8 @@ Records disabled until a use for them is found
 
 			dat +="<td width='300px' height='300px' valign='top'>"
 			dat += "<h2>Preferences</h2>" //Because fuck me if preferences can't be fucking modularized and expected to update in a reasonable timeframe.
-			dat += "<b>End of round deathmatch:</b> <a href='?_src_=prefs;preference=end_of_round_deathmatch'>[end_of_round_deathmatch ? "Enabled" : "Disabled"]</a><br>"
-			dat += "<h2>Citadel Preferences</h2>" //Because fuck me if preferences can't be fucking modularized and expected to update in a reasonable timeframe.
-			dat += "<b>Auto stand:</b> <a href='?_src_=prefs;preference=autostand'>[autostand ? "Enabled" : "Disabled"]</a><br>"
+			dat += "<b>End Of Round Deathmatch:</b> <a href='?_src_=prefs;preference=end_of_round_deathmatch'>[end_of_round_deathmatch ? "Enabled" : "Disabled"]</a><br>"
+			dat += "<b>Auto Stand:</b> <a href='?_src_=prefs;preference=autostand'>[autostand ? "Enabled" : "Disabled"]</a><br>"
 			dat += "<b>Auto OOC:</b> <a href='?_src_=prefs;preference=auto_ooc'>[auto_ooc ? "Disabled" : "Enabled" ]</a><br>"
 			dat += "<b>Force Slot Storage HUD:</b> <a href='?_src_=prefs;preference=no_tetris_storage'>[no_tetris_storage ? "Enabled" : "Disabled"]</a><br>"
 			dat += "<b>Screen Shake:</b> <a href='?_src_=prefs;preference=screenshake'>[(screenshake==100) ? "Full" : ((screenshake==0) ? "None" : "[screenshake]")]</a><br>"
@@ -786,6 +784,11 @@ Records disabled until a use for them is found
 				p_chaos = preferred_chaos
 			dat += "<b>Preferred Chaos Amount:</b> <a href='?_src_=prefs;preference=preferred_chaos;task=input'>[p_chaos]</a><br>"
 			dat += "<br>"
+			dat += "<h2>Content Preferences</h2>"
+			dat += "<b>Arousal:</b><a href='?_src_=prefs;preference=arousable'>[arousable == TRUE ? "Enabled" : "Disabled"]</a><BR>"
+			dat += "<b>Genital Examine Text</b>:<a href='?_src_=prefs;preference=genital_examine'>[(cit_toggles & GENITAL_EXAMINE) ? "Enabled" : "Disabled"]</a><BR>"
+			dat += "<b>Ass Slapping:</b> <a href='?_src_=prefs;preference=ass_slap'>[(cit_toggles & NO_ASS_SLAP) ? "Disallowed" : "Allowed"]</a><br>"
+			dat += "<b>Automatic Wagging:</b> <a href='?_src_=prefs;preference=auto_wag'>[(cit_toggles & NO_AUTO_WAG) ? "Disabled" : "Enabled"]</a><br>"
 			dat += "</td>"
 			dat += "</tr></table>"
 			if(unlock_content)
@@ -982,7 +985,7 @@ Records disabled until a use for them is found
 						dat += "</td><td><font size=2><i>[loadout_item ? (loadout_item[LOADOUT_CUSTOM_DESCRIPTION] ? loadout_item[LOADOUT_CUSTOM_DESCRIPTION] : gear.description) : gear.description]</i></font></td></tr>"
 
 					dat += "</table>"
-		if(CONTENT_PREFERENCES_TAB)
+		/*if(CONTENT_PREFERENCES_TAB)
 			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
 			dat += "<h2>Adult content prefs</h2>"
 			dat += "<b>Arousal:</b><a href='?_src_=prefs;preference=arousable'>[arousable == TRUE ? "Enabled" : "Disabled"]</a><BR>"
@@ -990,7 +993,7 @@ Records disabled until a use for them is found
 //			dat += "<b>Hypno:</b> <a href='?_src_=prefs;preference=never_hypno'>[(cit_toggles & NEVER_HYPNO) ? "Disallowed" : "Allowed"]</a><br>"
 			dat += "<b>Ass Slapping:</b> <a href='?_src_=prefs;preference=ass_slap'>[(cit_toggles & NO_ASS_SLAP) ? "Disallowed" : "Allowed"]</a><br>"
 			dat += "<b>Automatic Wagging:</b> <a href='?_src_=prefs;preference=auto_wag'>[(cit_toggles & NO_AUTO_WAG) ? "Disabled" : "Enabled"]</a><br>"
-/*			dat += "<b>Forced Feminization:</b> <a href='?_src_=prefs;preference=feminization'>[(cit_toggles & FORCED_FEM) ? "Allowed" : "Disallowed"]</a><br>"
+			dat += "<b>Forced Feminization:</b> <a href='?_src_=prefs;preference=feminization'>[(cit_toggles & FORCED_FEM) ? "Allowed" : "Disallowed"]</a><br>"
 			dat += "<b>Forced Masculinization:</b> <a href='?_src_=prefs;preference=masculinization'>[(cit_toggles & FORCED_MASC) ? "Allowed" : "Disallowed"]</a><br>"
 			dat += "<b>Lewd Hypno:</b> <a href='?_src_=prefs;preference=hypno'>[(cit_toggles & HYPNO) ? "Allowed" : "Disallowed"]</a><br>"
 			dat += "<b>Bimbofication:</b> <a href='?_src_=prefs;preference=bimbo'>[(cit_toggles & BIMBOFICATION) ? "Allowed" : "Disallowed"]</a><br>"
